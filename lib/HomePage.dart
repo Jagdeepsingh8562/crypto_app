@@ -29,9 +29,7 @@ class _HomePageState extends State<HomePage> {
         title: Text("Crypto App"),
         centerTitle: true,
       ),
-      body: currencies == null
-          ? Center(child: CircularProgressIndicator())
-          : cryptoWidget(),
+      body: cryptoWidget(),
     );
   }
 
@@ -39,7 +37,7 @@ class _HomePageState extends State<HomePage> {
     return Container(
       child: ListView.builder(
         itemBuilder: (context, index) {
-          final Map currency=widget.currencies[index];
+          final Map currency=widget.currencies['data'][index];
           final MaterialColor colors=_colors[index % _colors.length];
           return _getListitems(currency,colors);
         },
@@ -50,8 +48,8 @@ class _HomePageState extends State<HomePage> {
 }
  Widget _getListitems(Map currency,MaterialColor colors){
    return ListTile(
-     leading: CircleAvatar(backgroundColor: colors,child: Text(currency['data']['name']),),
-     title: Text(currency['data']['name'],style: TextStyle(fontWeight: FontWeight.bold),),
+     leading: CircleAvatar(backgroundColor: colors,child: Text(currency['name']),),
+     title: Text(currency['name'],style: TextStyle(fontWeight: FontWeight.bold),),
      subtitle: _getSubtitle(currency['quote']['USD']['price'].toString(),currency['quote']['USD']['percent_change_1h'].toString()),
      isThreeLine: true,
    );
