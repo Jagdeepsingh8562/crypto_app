@@ -41,17 +41,19 @@ class _HomePageState extends State<HomePage> {
           final MaterialColor colors=_colors[index % _colors.length];
           return _getListitems(currency,colors);
         },
-        itemCount: widget.currencies.length,
+        itemCount: widget.currencies['data'].length,
       ),
     );
   }
 }
  Widget _getListitems(Map currency,MaterialColor colors){
-   return ListTile(
-     leading: CircleAvatar(backgroundColor: colors,child: Text(currency['name']),),
-     title: Text(currency['name'],style: TextStyle(fontWeight: FontWeight.bold),),
-     subtitle: _getSubtitle(currency['quote']['USD']['price'].toString(),currency['quote']['USD']['percent_change_1h'].toString()),
-     isThreeLine: true,
+   return Card(
+        child: ListTile(
+       leading: CircleAvatar(backgroundColor: colors,child: Text(currency['symbol']),),
+       title: Text(currency['name'],style: TextStyle(fontWeight: FontWeight.bold),),
+       subtitle: _getSubtitle(currency['quote']['USD']['price'].toString(),currency['quote']['USD']['percent_change_1h'].toString()),
+       isThreeLine: true,
+     ),
    );
  }
 Widget _getSubtitle(String price,String change){
